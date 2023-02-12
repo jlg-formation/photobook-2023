@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 
-export const SplashScreen = () => {
+export const SplashScreen = ({name}: {name: string}) => {
   return (
     <View>
-      <Text>Splash Screen</Text>
+      <Text>{name}</Text>
     </View>
   );
 };
