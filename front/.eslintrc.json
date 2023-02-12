@@ -3,5 +3,10 @@
   "extends": "@react-native-community",
   "parserOptions": {
     "requireConfigFile": false
+  },
+  "rules": {
+    "prefer-const": "error",
+    "no-var": "error",
+    "eqeqeq": "error"
   }
 }
