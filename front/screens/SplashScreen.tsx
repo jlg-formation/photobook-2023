@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {gs, h1} from '../styles';
 
 export const SplashScreen = ({
   name,
@@ -9,9 +10,19 @@ export const SplashScreen = ({
   version: string;
 }) => {
   return (
-    <View>
-      <Text>{name}</Text>
-      <Text>{version}</Text>
+    <View style={styles.container}>
+      <Text style={h1}>{name}</Text>
+      <Text style={gs.text}>{version}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
