@@ -1,9 +1,13 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
+import {RootStackParamList} from './navigation';
 
-export const HomeScreen = ({navigation}: {navigation: any}) => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+export const HomeScreen = ({navigation}: Props) => {
   const {s} = useComposedStyles(gs, styles);
   return (
     <View style={s.container}>
