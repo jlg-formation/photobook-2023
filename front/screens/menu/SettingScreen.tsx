@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ColorSchemeName,
+  Pressable,
   StyleSheet,
   Text,
   TouchableNativeFeedback,
@@ -8,6 +9,12 @@ import {
 } from 'react-native';
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
+import {borderRadius} from '../../styles/theme';
+
+const locales = [
+  {locale: 'fr', label: 'Français'},
+  {locale: 'en', label: 'English'},
+];
 
 export const SettingScreen = () => {
   const {s} = useComposedStyles(gs, styles);
@@ -25,23 +32,19 @@ export const SettingScreen = () => {
       <Text style={s.h1}>Paramètres</Text>
       <View>
         <Text style={s.h2}>Langues</Text>
-        {[
-          {
-            locale: 'fr',
-            label: 'Français',
-          },
-          {
-            locale: 'en',
-            label: 'English',
-          },
-        ].map(o => (
-          <TouchableNativeFeedback
+        {locales.map(o => (
+          <Pressable
             onPress={changeLocale(o.locale)}
-            background={TouchableNativeFeedback.Ripple('#ccc', false)}>
+            android_ripple={{
+              color: '#ccc',
+              borderless: false,
+              foreground: true,
+            }}
+            style={s.buttonPressable}>
             <View style={s.secondaryButton}>
               <Text style={s.secondaryButtonText}>{o.label}</Text>
             </View>
-          </TouchableNativeFeedback>
+          </Pressable>
         ))}
       </View>
       <View>

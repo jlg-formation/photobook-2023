@@ -6,13 +6,16 @@ export const getButtonStyles = (cs: ColorSchemeName, bs: Styles) => {
   const isDark = cs === 'dark';
   console.log('isDark: ', isDark);
   const primaryButtonStyles = {
+    buttonPressable: create({
+      marginVertical: 5,
+    }),
     primaryButton: create({
       padding: 10,
       width: '100%',
       backgroundColor: primaryColor,
       color: 'white',
       alignItems: 'center',
-      marginVertical: 5,
+      marginVertical: 0,
       borderRadius: borderRadius,
     }),
     primaryButtonText: compose(bs.text, {
