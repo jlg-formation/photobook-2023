@@ -7,10 +7,14 @@ import {SplashScreen} from './screens/SplashScreen';
 
 function App() {
   const showSplashScreen = false;
+
+  const onConnected = () => {
+    console.log('onConnected');
+  };
   return showSplashScreen ? (
     <SplashScreen name={displayName} version={version} />
   ) : (
-    <LoginScreen />
+    <LoginScreen onConnected={onConnected} />
   );
 }
 

@@ -10,7 +10,7 @@ import {
 import {gs} from '../styles/global';
 import {useComposedStyles} from '../styles/hook';
 
-export const LoginScreen = () => {
+export const LoginScreen = ({onConnected}: {onConnected: () => void}) => {
   const {s} = useComposedStyles(gs, styles);
 
   return (
@@ -26,7 +26,7 @@ export const LoginScreen = () => {
           <TextInput style={s.textInput} />
         </View>
         <View style={s.buttonContainer}>
-          <Button title="Se connecter" />
+          <Button title="Se connecter" onPress={onConnected} />
         </View>
       </View>
     </View>
