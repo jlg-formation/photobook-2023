@@ -1,6 +1,7 @@
 import React from 'react';
 import {ColorSchemeName, Image, StyleSheet, Text, View} from 'react-native';
-import {useStyle} from '../styles/hook';
+import {gs} from '../styles/global';
+import {useComposedStyles} from '../styles/hook';
 
 export const SplashScreen = ({
   name,
@@ -9,7 +10,7 @@ export const SplashScreen = ({
   name: string;
   version: string;
 }) => {
-  const {s, cs} = useStyle(styles);
+  const {s, cs} = useComposedStyles(gs, styles);
   const isDark = cs === 'dark';
 
   return (

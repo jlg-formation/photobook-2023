@@ -1,7 +1,7 @@
 import {ColorSchemeName} from 'react-native';
 import {create, compose, Styles} from './utils';
 
-export const getFormStyles = (cs: ColorSchemeName, bs: Styles): Styles => {
+export const getFormStyles = (cs: ColorSchemeName, bs: Styles) => {
   const isDark = cs === 'dark';
   console.log('isDark: ', isDark);
 

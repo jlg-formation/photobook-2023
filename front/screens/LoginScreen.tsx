@@ -7,10 +7,11 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {useStyle} from '../styles/hook';
+import {gs} from '../styles/global';
+import {useComposedStyles} from '../styles/hook';
 
 export const LoginScreen = () => {
-  const {s} = useStyle(styles);
+  const {s} = useComposedStyles(gs, styles);
 
   return (
     <View style={s.container}>

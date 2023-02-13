@@ -1,8 +1,8 @@
 import {ColorSchemeName} from 'react-native';
 import {getFormStyles} from './form';
-import {compose, create, styleCompose, Styles} from './utils';
+import {compose, create, styleCompose} from './utils';
 
-export const getGlobalStyle = (cs: ColorSchemeName): Styles => {
+export const gs = (cs: ColorSchemeName) => {
   console.log('getGlobalStyle');
 
   const isDark = cs === 'dark';
@@ -14,7 +14,7 @@ export const getGlobalStyle = (cs: ColorSchemeName): Styles => {
     }),
   };
 
-  const gs = {
+  const globalStyles = {
     text: bs.text,
     h1: compose(bs.text, {
       fontSize: 30,
@@ -28,5 +28,5 @@ export const getGlobalStyle = (cs: ColorSchemeName): Styles => {
       fontWeight: 'bold',
     }),
   };
-  return styleCompose(gs, getFormStyles(cs, bs)) as Styles;
+  return styleCompose(globalStyles, getFormStyles(cs, bs));
 };

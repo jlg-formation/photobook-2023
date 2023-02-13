@@ -20,12 +20,14 @@ export const compose = (...selectors: CssSelector[]): CssSelector => {
   return result;
 };
 
-export const styleCompose = (...styles: Styles[]): Styles => {
-  const result: Styles = {};
-  for (const style of styles) {
-    for (const [key, value] of Object.entries(style)) {
-      result[key] = {...(result[key] as object), ...(value as object)};
-    }
+export const styleCompose = <T extends Styles, U extends Styles>(
+  s1: T,
+  s2: U,
+) => {
+  const result = {...s1} as Record<keyof T | keyof U, CssSelector>;
+
+  for (const [key, value] of Object.entries(s2) as [keyof U, CssSelector][]) {
+    result[key] = {...(result[key] as object), ...(value as object)};
   }
   return result;
 };
