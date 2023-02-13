@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
-import {borderRadius} from '../../styles/theme';
+import {androidRipple} from '../../styles/theme';
 
 const locales = [
   {locale: 'fr', label: 'Français'},
@@ -35,11 +35,7 @@ export const SettingScreen = () => {
         {locales.map(o => (
           <Pressable
             onPress={changeLocale(o.locale)}
-            android_ripple={{
-              color: '#ccc',
-              borderless: false,
-              foreground: true,
-            }}
+            android_ripple={androidRipple}
             style={s.buttonPressable}>
             <View style={s.secondaryButton}>
               <Text style={s.secondaryButtonText}>{o.label}</Text>
