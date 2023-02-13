@@ -27,6 +27,20 @@ export const gs = (cs: ColorSchemeName) => {
       fontSize: 20,
       fontWeight: 'bold',
     }),
+    p: compose(bs.text, {
+      paddingBottom: 10,
+    }),
+    b: create({
+      fontWeight: 'bold',
+    }),
+    footer: create({
+      backgroundColor: isDark ? '#333' : '#aaa',
+      padding: 10,
+    }),
+    footerText: compose(bs.text, {
+      fontSize: 16,
+      color: isDark ? 'white' : 'white',
+    }),
   };
   return styleCompose(globalStyles, getFormStyles(cs, bs));
 };
