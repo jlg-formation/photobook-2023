@@ -1,4 +1,5 @@
 import {ColorSchemeName} from 'react-native';
+import {getButtonStyles} from './button';
 import {getFormStyles} from './form';
 import {compose, create, styleCompose} from './utils';
 
@@ -26,6 +27,7 @@ export const gs = (cs: ColorSchemeName) => {
     h2: compose(bs.text, {
       fontSize: 20,
       fontWeight: 'bold',
+      marginVertical: 10,
     }),
     p: compose(bs.text, {
       paddingBottom: 10,
@@ -42,5 +44,9 @@ export const gs = (cs: ColorSchemeName) => {
       color: isDark ? 'white' : 'white',
     }),
   };
-  return styleCompose(globalStyles, getFormStyles(cs, bs));
+
+  return styleCompose(
+    styleCompose(globalStyles, getButtonStyles(cs, bs)),
+    getFormStyles(cs, bs),
+  );
 };
