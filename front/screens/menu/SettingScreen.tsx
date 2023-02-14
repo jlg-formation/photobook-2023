@@ -7,6 +7,7 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
+import {useAuthenticationStore} from '../../store/authentication';
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
 import {androidRipple} from '../../styles/theme';
@@ -18,13 +19,19 @@ const locales = [
 
 export const SettingScreen = () => {
   const {s} = useComposedStyles(gs, styles);
+  const {disconnect} = useAuthenticationStore();
   const changeLocale = (locale: string) => () => {
     console.log('update language to', locale);
   };
   console.log('s.secondaryButton', s.secondaryButton);
 
-  const onDisconnect = () => {
-    console.log('about to disconnect');
+  const onDisconnect = async () => {
+    try {
+      console.log('about to disconnect');
+      await disconnect();
+    } catch (err) {
+      console.log('err: ', err);
+    }
   };
 
   return (
