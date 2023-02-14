@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  ActivityIndicator,
   Button,
   ColorSchemeName,
   StyleSheet,
@@ -13,15 +14,19 @@ import {useComposedStyles} from '../styles/hook';
 
 export const LoginScreen = () => {
   const {s} = useComposedStyles(gs, styles);
+  const {connect} = useAuthenticationStore();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const {connect} = useAuthenticationStore();
+  const [isConnecting, setIsConnecting] = useState(false);
 
   const onConnected = async () => {
     try {
+      setIsConnecting(true);
       await connect(login, password);
     } catch (err) {
       console.log('err: ', err);
+    } finally {
+      setIsConnecting(false);
     }
   };
 
@@ -46,7 +51,11 @@ export const LoginScreen = () => {
           />
         </View>
         <View style={s.buttonContainer}>
-          <Button title="Se connecter" onPress={onConnected} />
+          {isConnecting ? (
+            <ActivityIndicator />
+          ) : (
+            <Button title="Se connecter" onPress={onConnected} />
+          )}
         </View>
       </View>
     </View>
