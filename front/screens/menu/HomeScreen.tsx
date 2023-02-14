@@ -1,21 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ColorSchemeName,
   Image,
+  RefreshControl,
   ScrollView,
   StyleSheet,
   View,
 } from 'react-native';
 import {PostAdd} from '../../posts/PostAdd';
 import {PostList} from '../../posts/PostList';
+import {useArticleStore} from '../../store/article.store';
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
 
 export const HomeScreen = () => {
   const {s} = useComposedStyles(gs, styles);
+  const {retrieveAll} = useArticleStore();
+
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = async () => {
+    try {
+      console.log('refresh');
+      setRefreshing(true);
+      await retrieveAll();
+    } catch (err) {
+      console.log('err: ', err);
+    } finally {
+      setRefreshing(false);
+    }
+  };
   return (
     <View style={s.container}>
-      <ScrollView style={s.scrollview}>
+      <ScrollView
+        style={s.scrollview}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View style={s.container}>
           <Image
             style={s.userBackground}
