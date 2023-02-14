@@ -28,6 +28,7 @@ export const PostAdd = () => {
       content: content,
       images: [],
     });
+    setContent('');
     await retrieveAll();
   };
   return (
