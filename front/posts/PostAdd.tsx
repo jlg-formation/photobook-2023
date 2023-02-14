@@ -46,11 +46,13 @@ export const PostAdd = () => {
             <Ionicons style={s.buttonIcon} name="camera-outline" />
           </View>
         </Pressable>
-        <Pressable onPress={createPost} android_ripple={androidRipple}>
-          <View style={s.primaryButton}>
-            <Text style={s.primaryButtonText}>Envoyer</Text>
-          </View>
-        </Pressable>
+        {content.length > 0 && (
+          <Pressable onPress={createPost} android_ripple={androidRipple}>
+            <View style={s.primaryButton}>
+              <Text style={s.primaryButtonText}>Envoyer</Text>
+            </View>
+          </Pressable>
+        )}
       </View>
     </View>
   );
