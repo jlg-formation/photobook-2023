@@ -7,6 +7,28 @@ import {LegalScreen} from './menu/LegalScreen';
 import {RootStackParamList} from './menu/navigation';
 import {SettingScreen} from './menu/SettingScreen';
 
+const getIconName = (routeName: keyof RootStackParamList, focused: boolean) => {
+  if (routeName === 'Home') {
+    return focused ? 'home' : 'home-outline';
+  }
+  if (routeName === 'Legal') {
+    return focused ? 'information-circle' : 'information-circle-outline';
+  }
+  return focused ? 'settings' : 'settings-outline';
+};
+
+const getTabBarIcon =
+  (routeName: keyof RootStackParamList) =>
+  ({focused, color, size}: {focused: boolean; color: string; size: number}) => {
+    return (
+      <Ionicons
+        name={getIconName(routeName, focused)}
+        size={size}
+        color={color}
+      />
+    );
+  };
+
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
 export const MenuScreen = () => {
@@ -14,21 +36,7 @@ export const MenuScreen = () => {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({route}) => ({
-          // eslint-disable-next-line react/no-unstable-nested-components
-          tabBarIcon: ({focused, color, size}) => {
-            let iconName = 'ios-information-circle';
-
-            if (route.name === 'Home') {
-              iconName = focused
-                ? 'ios-information-circle'
-                : 'ios-information-circle-outline';
-            } else if (route.name === 'Settings') {
-              iconName = focused ? 'ios-list' : 'ios-list-outline';
-            }
-
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
+          tabBarIcon: getTabBarIcon(route.name),
           tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
         })}>
