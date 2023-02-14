@@ -17,6 +17,9 @@ export const getFormStyles = (cs: ColorSchemeName, bs: Styles) => {
       borderRadius: 5,
       borderColor: isDark ? 'white' : 'black',
     }),
+    textarea: compose(bs.text, {
+      textAlignVertical: 'top',
+    }),
     buttonContainer: create({
       marginTop: 30,
     }),

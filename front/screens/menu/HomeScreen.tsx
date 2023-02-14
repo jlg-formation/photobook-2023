@@ -1,37 +1,54 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {
+  ColorSchemeName,
+  Image,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {PostAdd} from '../../posts/PostAdd';
+import {PostList} from '../../posts/PostList';
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
-import {RootStackParamList} from './navigation';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
-
-export const HomeScreen = ({navigation}: Props) => {
+export const HomeScreen = () => {
   const {s} = useComposedStyles(gs, styles);
   return (
     <View style={s.container}>
-      <Text>home</Text>
-      <Button
-        title="goto legal"
-        onPress={() => {
-          navigation.navigate('Legal');
-        }}
-      />
-      <Button
-        title="goto settings"
-        onPress={() => {
-          navigation.navigate('Settings');
-        }}
-      />
+      <ScrollView style={s.scrollview}>
+        <View style={s.container}>
+          <Image
+            style={s.userBackground}
+            source={require('../../assets/user-background.webp')}
+          />
+          <View style={s.postContainer}>
+            <PostAdd />
+            <PostList />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
-const styles = () =>
-  StyleSheet.create({
+const styles = (cs: ColorSchemeName) => {
+  const isDark = cs === 'dark';
+  return StyleSheet.create({
+    scrollview: {
+      height: '100%',
+    },
     container: {
       height: '100%',
       justifyContent: 'space-between',
+      backgroundColor: isDark ? '#333' : '#ccc',
+    },
+    postContainer: {
+      padding: 10,
+      gap: 10,
+    },
+    userBackground: {
+      height: 200,
+      width: '100%',
     },
   });
+};
