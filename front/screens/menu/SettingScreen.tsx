@@ -34,6 +34,7 @@ export const SettingScreen = () => {
         <Text style={s.h2}>Langues</Text>
         {locales.map(o => (
           <Pressable
+            key={o.locale}
             onPress={changeLocale(o.locale)}
             android_ripple={androidRipple}
             style={s.buttonPressable}>
