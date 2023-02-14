@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
+  ActivityIndicator,
   ColorSchemeName,
   Pressable,
   StyleSheet,
@@ -20,6 +21,7 @@ const locales = [
 export const SettingScreen = () => {
   const {s} = useComposedStyles(gs, styles);
   const {disconnect} = useAuthenticationStore();
+  const [isDisconnecting, setIsDisconnecting] = useState(false);
   const changeLocale = (locale: string) => () => {
     console.log('update language to', locale);
   };
@@ -28,9 +30,12 @@ export const SettingScreen = () => {
   const onDisconnect = async () => {
     try {
       console.log('about to disconnect');
+      setIsDisconnecting(true);
       await disconnect();
     } catch (err) {
       console.log('err: ', err);
+    } finally {
+      setIsDisconnecting(false);
     }
   };
 
@@ -58,7 +63,11 @@ export const SettingScreen = () => {
           onPress={onDisconnect}
           background={TouchableNativeFeedback.Ripple('#ccc', false)}>
           <View style={s.primaryButton}>
-            <Text style={s.primaryButtonText}>Disconnect</Text>
+            {isDisconnecting ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <Text style={s.primaryButtonText}>Disconnect</Text>
+            )}
           </View>
         </TouchableNativeFeedback>
       </View>

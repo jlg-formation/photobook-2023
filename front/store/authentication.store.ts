@@ -19,6 +19,7 @@ export const useAuthenticationStore = create<AuthenticationStore>(set => ({
     }
   },
   disconnect: async () => {
+    await api.disconnect();
     set({user: undefined});
   },
 }));
