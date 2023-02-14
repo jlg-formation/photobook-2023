@@ -1,16 +1,13 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {gs} from '../styles/global';
 import {useComposedStyles} from '../styles/hook';
-import {PostItem} from './PostItem';
 
-export const PostList = () => {
+export const PostItem = () => {
   const {s} = useComposedStyles(gs, styles);
   return (
     <View style={s.container}>
-      {[0, 0, 0, 0].map((n, i) => (
-        <PostItem key={i} />
-      ))}
+      <Text>je suis un post</Text>
     </View>
   );
 };
