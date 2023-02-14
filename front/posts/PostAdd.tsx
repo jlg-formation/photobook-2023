@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ColorSchemeName,
   Pressable,
@@ -8,14 +8,27 @@ import {
   View,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useArticleStore} from '../store/article.store';
 import {gs} from '../styles/global';
 import {useComposedStyles} from '../styles/hook';
 import {androidRipple, borderRadius} from '../styles/theme';
 
 export const PostAdd = () => {
   const {s} = useComposedStyles(gs, styles);
+  const {add, retrieveAll} = useArticleStore();
+  const [content, setContent] = useState('');
+
   const addPhotos = () => {
     console.log('add photos');
+  };
+
+  const createPost = async () => {
+    console.log('create post');
+    await add({
+      content: content,
+      images: [],
+    });
+    await retrieveAll();
   };
   return (
     <View style={s.container}>
@@ -23,6 +36,8 @@ export const PostAdd = () => {
         style={s.textarea}
         placeholder="What is in your mind?"
         multiline={true}
+        onChangeText={setContent}
+        value={content}
       />
       <View style={s.buttons}>
         <Pressable onPress={addPhotos} android_ripple={androidRipple}>
@@ -30,7 +45,7 @@ export const PostAdd = () => {
             <Ionicons style={s.buttonIcon} name="camera-outline" />
           </View>
         </Pressable>
-        <Pressable onPress={addPhotos} android_ripple={androidRipple}>
+        <Pressable onPress={createPost} android_ripple={androidRipple}>
           <View style={s.primaryButton}>
             <Text style={s.primaryButtonText}>Envoyer</Text>
           </View>

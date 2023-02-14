@@ -1,15 +1,16 @@
 import React from 'react';
 import {ColorSchemeName, Image, StyleSheet, Text, View} from 'react-native';
+import {Article} from '../interfaces/Article';
 import {gs} from '../styles/global';
 import {useComposedStyles} from '../styles/hook';
 import {borderRadius} from '../styles/theme';
 
-export const PostItem = () => {
+export const PostItem = ({article}: {article: Article}) => {
   const {s} = useComposedStyles(gs, styles);
   return (
     <View style={s.container}>
-      <Text style={s.text}>je suis un post</Text>
-      {[0, 0].map((n, i) => (
+      <Text style={s.text}>{article.content}</Text>
+      {article.images.map((n, i) => (
         <View style={s.imageContainer} key={i}>
           <Image
             style={s.image}

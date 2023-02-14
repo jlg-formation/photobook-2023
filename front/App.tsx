@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {displayName} from './app.json';
 import {version} from './package.json';
@@ -8,7 +8,7 @@ import {SplashScreen} from './screens/SplashScreen';
 import {
   isConnectedSelector,
   useAuthenticationStore,
-} from './store/authentication';
+} from './store/authentication.store';
 
 function App() {
   const showSplashScreen = false;

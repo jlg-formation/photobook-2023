@@ -7,7 +7,7 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
-import {useAuthenticationStore} from '../../store/authentication';
+import {useAuthenticationStore} from '../../store/authentication.store';
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
 import {androidRipple} from '../../styles/theme';
