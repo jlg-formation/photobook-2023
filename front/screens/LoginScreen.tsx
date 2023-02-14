@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   ColorSchemeName,
@@ -7,11 +7,23 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import {useAuthenticationStore} from '../store/authentication';
 import {gs} from '../styles/global';
 import {useComposedStyles} from '../styles/hook';
 
-export const LoginScreen = ({onConnected}: {onConnected: () => void}) => {
+export const LoginScreen = () => {
   const {s} = useComposedStyles(gs, styles);
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const {connect} = useAuthenticationStore();
+
+  const onConnected = async () => {
+    try {
+      await connect(login, password);
+    } catch (err) {
+      console.log('err: ', err);
+    }
+  };
 
   return (
     <View style={s.container}>
@@ -19,11 +31,19 @@ export const LoginScreen = ({onConnected}: {onConnected: () => void}) => {
       <View style={s.form}>
         <View style={s.label}>
           <Text style={s.labelText}>Login</Text>
-          <TextInput style={s.textInput} />
+          <TextInput
+            style={s.textInput}
+            onChangeText={setLogin}
+            value={login}
+          />
         </View>
         <View style={s.label}>
           <Text style={s.labelText}>Mot de passe</Text>
-          <TextInput style={s.textInput} />
+          <TextInput
+            style={s.textInput}
+            onChangeText={setPassword}
+            value={password}
+          />
         </View>
         <View style={s.buttonContainer}>
           <Button title="Se connecter" onPress={onConnected} />
