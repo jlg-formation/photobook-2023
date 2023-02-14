@@ -17,5 +17,7 @@ export const PostList = () => {
 
 const styles = () =>
   StyleSheet.create({
-    container: {},
+    container: {
+      gap: 10,
+    },
   });

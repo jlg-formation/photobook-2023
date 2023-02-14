@@ -40,7 +40,7 @@ const styles = (cs: ColorSchemeName) => {
     container: {
       height: '100%',
       justifyContent: 'space-between',
-      backgroundColor: isDark ? '#333' : '#ccc',
+      backgroundColor: isDark ? '#333' : '#eee',
     },
     postContainer: {
       padding: 10,
