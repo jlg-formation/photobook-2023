@@ -7,22 +7,12 @@ import {LegalScreen} from './menu/LegalScreen';
 import {RootStackParamList} from './menu/navigation';
 import {SettingScreen} from './menu/SettingScreen';
 
-const getIconName = (routeName: keyof RootStackParamList, focused: boolean) => {
-  if (routeName === 'Home') {
-    return focused ? 'home' : 'home-outline';
-  }
-  if (routeName === 'Legal') {
-    return focused ? 'information-circle' : 'information-circle-outline';
-  }
-  return focused ? 'settings' : 'settings-outline';
-};
-
 const getTabBarIcon =
-  (routeName: keyof RootStackParamList) =>
+  (iconName: string) =>
   ({focused, color, size}: {focused: boolean; color: string; size: number}) => {
     return (
       <Ionicons
-        name={getIconName(routeName, focused)}
+        name={focused ? iconName : iconName + '-outline'}
         size={size}
         color={color}
       />
@@ -35,14 +25,31 @@ export const MenuScreen = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={({route}) => ({
-          tabBarIcon: getTabBarIcon(route.name),
+        screenOptions={() => ({
           tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
         })}>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Legal" component={LegalScreen} />
-        <Tab.Screen name="Settings" component={SettingScreen} />
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: getTabBarIcon('home'),
+          }}
+        />
+        <Tab.Screen
+          name="Legal"
+          component={LegalScreen}
+          options={{
+            tabBarIcon: getTabBarIcon('information-circle'),
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingScreen}
+          options={{
+            tabBarIcon: getTabBarIcon('settings'),
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
