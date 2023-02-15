@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Alert,
   ColorSchemeName,
   Pressable,
   StyleSheet,
@@ -23,13 +24,18 @@ export const PostAdd = () => {
   };
 
   const createPost = async () => {
-    console.log('create post');
-    await add({
-      content: content,
-      images: [],
-    });
-    setContent('');
-    await retrieveAll();
+    try {
+      console.log('create post');
+      await add({
+        content: content,
+        images: [],
+      });
+      setContent('');
+      await retrieveAll();
+    } catch (err) {
+      console.log('err: ', err);
+      Alert.alert('Technical Error');
+    }
   };
   return (
     <View style={s.container}>
