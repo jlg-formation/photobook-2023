@@ -1,8 +1,7 @@
 import {domainUrl} from './app.json';
 import {Article, NewArticle} from './interfaces/Article';
 import {User} from './interfaces/User';
-
-const generateId = () => Date.now() + '_' + Math.random() * 1e15;
+import {authFetch} from './store/authentication.store';
 
 class API {
   articles: Article[] = [];
@@ -46,7 +45,7 @@ class API {
 
   async addArticle(newArticle: NewArticle) {
     try {
-      const response = await fetch(domainUrl + '/api/articles', {
+      const response = await authFetch(domainUrl + '/api/articles', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newArticle),
@@ -61,6 +60,16 @@ class API {
 
   async getArticles() {
     return this.articles;
+  }
+
+  async upload(formData: FormData) {
+    return await authFetch(domainUrl + '/api/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      body: formData,
+    });
   }
 }
 

@@ -28,3 +28,11 @@ export const useAuthenticationStore = create<AuthenticationStore>(set => ({
 export const isConnectedSelector = (state: AuthenticationStore) => ({
   isConnected: state.user !== undefined,
 });
+
+export const authFetch = async (info: RequestInfo, init: RequestInit) => {
+  const response = await fetch(info, init);
+  if (response.status === 401) {
+    await useAuthenticationStore.getState().disconnect();
+  }
+  return response;
+};
