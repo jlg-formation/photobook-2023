@@ -1,3 +1,6 @@
+import {memoize} from 'lodash';
+import {StyleSheet} from 'react-native/Libraries/StyleSheet/StyleSheet';
+import {ColorSchemeName} from 'react-native/Libraries/Utilities/Appearance';
 import {ImageStyle, StyleProp, TextStyle, ViewStyle} from 'react-native/types';
 
 export type CssSelector = StyleProp<ViewStyle> &
@@ -30,4 +33,12 @@ export const styleCompose = <T extends Styles, U extends Styles>(
     result[key] = {...(result[key] as object), ...(value as object)};
   }
   return result;
+};
+
+export const createStyle = <T extends Parameters<typeof StyleSheet.create>[0]>(
+  fn: (cs: ColorSchemeName) => T,
+) => {
+  return memoize((cs: ColorSchemeName) => {
+    return StyleSheet.create(fn(cs));
+  });
 };

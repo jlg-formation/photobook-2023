@@ -1,3 +1,4 @@
+import {memoize} from 'lodash';
 import React, {useState} from 'react';
 import {
   ColorSchemeName,
@@ -12,6 +13,7 @@ import {PostList} from '../../posts/PostList';
 import {useArticleStore} from '../../store/article.store';
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
+import {createStyle} from '../../styles/utils';
 
 export const HomeScreen = () => {
   const {s} = useComposedStyles(gs, styles);
@@ -52,9 +54,9 @@ export const HomeScreen = () => {
   );
 };
 
-const styles = (cs: ColorSchemeName) => {
+const styles = createStyle((cs: ColorSchemeName) => {
   const isDark = cs === 'dark';
-  return StyleSheet.create({
+  return {
     scrollview: {
       height: '100%',
     },
@@ -71,5 +73,5 @@ const styles = (cs: ColorSchemeName) => {
       height: 200,
       width: '100%',
     },
-  });
-};
+  };
+});
