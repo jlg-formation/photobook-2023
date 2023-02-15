@@ -25,16 +25,23 @@ export const PostAdd = () => {
   const [content, setContent] = useState('');
   const [images, setImages] = useState([] as string[]);
 
+  const reset = () => {
+    setImages([]);
+    setContent('');
+  };
+
   const addPhotos = async () => {
     try {
       console.log('add photos');
       const response = await launchImageLibrary({
         mediaType: 'photo',
+        selectionLimit: 3,
       });
       console.log('result: ', response);
       if (response.assets === undefined) {
         return;
       }
+      const newImages = [...images];
       for (const asset of response.assets) {
         // for the time being support only jpg
         if (asset.fileName === undefined) {
@@ -54,8 +61,9 @@ export const PostAdd = () => {
         console.log('response: ', response);
         const imageUri = domainUrl + '/api/upload/' + imageName;
         console.log('imageUri: ', imageUri);
-        setImages([...images, imageUri]);
+        newImages.push(imageUri);
       }
+      setImages(newImages);
     } catch (err) {
       console.log('err: ', err);
     }
@@ -91,11 +99,18 @@ export const PostAdd = () => {
         ))}
       </View>
       <View style={s.buttons}>
-        <Pressable onPress={addPhotos} android_ripple={androidRipple}>
-          <View style={s.secondaryButton}>
-            <Ionicons style={s.buttonIcon} name="camera-outline" />
-          </View>
-        </Pressable>
+        <View style={s.secondaries}>
+          <Pressable onPress={addPhotos} android_ripple={androidRipple}>
+            <View style={s.secondaryButton}>
+              <Ionicons style={s.buttonIcon} name="camera-outline" />
+            </View>
+          </Pressable>
+          <Pressable onPress={reset} android_ripple={androidRipple}>
+            <View style={s.secondaryButton}>
+              <Ionicons style={s.buttonIcon} name="trash-outline" />
+            </View>
+          </Pressable>
+        </View>
         {content.length > 0 && (
           <Pressable onPress={createPost} android_ripple={androidRipple}>
             <View style={s.primaryButton}>
@@ -133,6 +148,10 @@ const styles = (cs: ColorSchemeName) => {
     buttons: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+    },
+    secondaries: {
+      flexDirection: 'row',
+      gap: 10,
     },
   });
 };
