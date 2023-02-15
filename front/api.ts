@@ -45,8 +45,18 @@ class API {
   }
 
   async addArticle(newArticle: NewArticle) {
-    const article: Article = {id: generateId(), ...newArticle};
-    this.articles.push(article);
+    try {
+      const response = await fetch(domainUrl + '/api/articles', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newArticle),
+      });
+      const article = await response.json();
+      this.articles.push(article);
+    } catch (err) {
+      console.log('err: ', err);
+      throw new Error('Technical Error');
+    }
   }
 
   async getArticles() {
