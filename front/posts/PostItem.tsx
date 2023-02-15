@@ -10,11 +10,13 @@ export const PostItem = ({article}: {article: Article}) => {
   return (
     <View style={s.container}>
       <Text style={s.text}>{article.content}</Text>
-      {article.images.map((n, i) => (
+      {article.images.map((image, i) => (
         <View style={s.imageContainer} key={i}>
           <Image
             style={s.image}
-            source={require('../assets/user-background.webp')}
+            source={{
+              uri: image,
+            }}
           />
         </View>
       ))}
