@@ -2,10 +2,10 @@ import {ColorSchemeName} from 'react-native';
 import {getButtonStyles} from './button';
 import {getFormStyles} from './form';
 import {compose, create, styleCompose} from './utils';
+import {memoize} from 'lodash';
 
-export const gs = (cs: ColorSchemeName) => {
-  console.log('getGlobalStyle');
-
+export const gs = memoize((cs: ColorSchemeName) => {
+  console.log('getGlobalStyle with cs =', cs);
   const isDark = cs === 'dark';
 
   const bs = {
@@ -45,8 +45,10 @@ export const gs = (cs: ColorSchemeName) => {
     }),
   };
 
-  return styleCompose(
+  const result = styleCompose(
     styleCompose(globalStyles, getButtonStyles(cs, bs)),
     getFormStyles(cs, bs),
   );
-};
+
+  return result;
+});
