@@ -12,5 +12,6 @@
     "login": "Identifiant",
     "password": "Mot de passe",
     "connect": "Se connecter"
-  }
+  },
+  "technicalError": "Erreur technique"
 }

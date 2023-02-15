@@ -12,5 +12,6 @@
     "login": "Login",
     "password": "Password",
     "connect": "Connect"
-  }
+  },
+  "technicalError": "Technical Error"
 }

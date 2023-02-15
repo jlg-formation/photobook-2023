@@ -2,13 +2,16 @@ import {domainUrl} from './app.json';
 import {Article, NewArticle} from './interfaces/Article';
 import {User} from './interfaces/User';
 import {authFetch} from './store/authentication.store';
+import {useTranslation} from './store/i18n.store';
 
 class API {
   articles: Article[] = [];
   async connect(login: string, password: string): Promise<User> {
+    const {t} = useTranslation.getState();
     try {
       console.log('login: ', login);
       console.log('password: ', password);
+
       const response = await fetch(domainUrl + '/api/auth/connect', {
         method: 'POST',
         headers: {
@@ -31,7 +34,7 @@ class API {
           throw err;
         }
       }
-      throw new Error('Technical Error');
+      throw new Error(t.technicalError);
     }
   }
 

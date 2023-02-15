@@ -18,25 +18,31 @@ const getDefaultLocale = () => {
   return defaultLocale.substring(0, 2) === 'fr' ? 'fr' : 'en';
 };
 
+const getTranslation = (locale: Locale) => {
+  if (locale === 'fr') {
+    const json = merge({}, enJson, frJson);
+    return json;
+  }
+  return enJson;
+};
+
 export interface I18nStore {
   locale: Locale;
+  t: typeof enJson;
   setLocale: (newLocale: Locale) => void;
 }
 
-export const useI18nStore = create<I18nStore>(set => ({
-  locale: getDefaultLocale(),
-  setLocale: newLocale => {
-    console.log('update locale to ' + newLocale);
-    set({locale: newLocale});
-  },
-}));
+export const useI18nStore = create<I18nStore>(set => {
+  const locale = getDefaultLocale();
+  const t = getTranslation(locale);
+  return {
+    locale,
+    t,
+    setLocale: newLocale => {
+      console.log('update locale to ' + newLocale);
+      set({locale: newLocale, t: getTranslation(newLocale)});
+    },
+  };
+});
 
-export const useTranslation = () =>
-  useI18nStore((state): {t: typeof enJson} => {
-    console.log('useTranslation with state', state);
-    if (state.locale === 'fr') {
-      const json = merge({}, enJson, frJson);
-      return {t: json};
-    }
-    return {t: enJson};
-  });
+export const useTranslation = useI18nStore;
