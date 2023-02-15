@@ -11,11 +11,12 @@ import {
 import {useAuthenticationStore} from '../store/authentication.store';
 import {gs} from '../styles/global';
 import {useComposedStyles} from '../styles/hook';
+import {defaultLogin} from '../app.json';
 
 export const LoginScreen = () => {
   const {s} = useComposedStyles(gs, styles);
   const {connect} = useAuthenticationStore();
-  const [login, setLogin] = useState('');
+  const [login, setLogin] = useState(defaultLogin);
   const [password, setPassword] = useState('');
   const [isConnecting, setIsConnecting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
