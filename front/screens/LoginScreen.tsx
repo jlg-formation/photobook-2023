@@ -18,13 +18,18 @@ export const LoginScreen = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [isConnecting, setIsConnecting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const onConnected = async () => {
+  const onConnect = async () => {
     try {
+      setErrorMsg('');
       setIsConnecting(true);
       await connect(login, password);
     } catch (err) {
       console.log('err: ', err);
+      if (err instanceof Error) {
+        setErrorMsg(err.message);
+      }
     } finally {
       setIsConnecting(false);
     }
@@ -50,11 +55,14 @@ export const LoginScreen = () => {
             value={password}
           />
         </View>
+        <View style={s.errorContainer}>
+          <Text style={s.error}>{errorMsg}</Text>
+        </View>
         <View style={s.buttonContainer}>
           {isConnecting ? (
             <ActivityIndicator />
           ) : (
-            <Button title="Se connecter" onPress={onConnected} />
+            <Button title="Se connecter" onPress={onConnect} />
           )}
         </View>
       </View>

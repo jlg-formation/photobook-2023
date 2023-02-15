@@ -16,6 +16,7 @@ export const useAuthenticationStore = create<AuthenticationStore>(set => ({
       set({user});
     } catch (err) {
       console.log('err: ', err);
+      throw err;
     }
   },
   disconnect: async () => {

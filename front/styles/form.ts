@@ -20,8 +20,16 @@ export const getFormStyles = (cs: ColorSchemeName, bs: Styles) => {
     textarea: compose(bs.text, {
       textAlignVertical: 'top',
     }),
+    errorContainer: create({
+      height: 100,
+      justifyContent: 'center',
+    }),
+    error: compose(bs.text, {
+      fontWeight: 'bold',
+      textAlign: 'center',
+    }),
     buttonContainer: create({
-      marginTop: 30,
+      marginTop: 0,
     }),
   };
   return s;
