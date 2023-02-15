@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   ActivityIndicator,
   ColorSchemeName,
@@ -26,13 +26,16 @@ export const SettingScreen = () => {
   const {disconnect} = useAuthenticationStore();
   const [isDisconnecting, setIsDisconnecting] = useState(false);
 
-  const changeLocale = (locale: Locale) => () => {
-    console.log('update language to', locale);
-    setLocale(locale);
-  };
+  const changeLocale = useCallback(
+    (locale: Locale) => () => {
+      console.log('update language to', locale);
+      setLocale(locale);
+    },
+    [setLocale],
+  );
   console.log('s.secondaryButton', s.secondaryButton);
 
-  const onDisconnect = async () => {
+  const onDisconnect = useCallback(async () => {
     try {
       console.log('about to disconnect');
       setIsDisconnecting(true);
@@ -42,7 +45,7 @@ export const SettingScreen = () => {
     } finally {
       setIsDisconnecting(false);
     }
-  };
+  }, [disconnect]);
 
   return (
     <View style={s.container}>

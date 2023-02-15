@@ -1,7 +1,12 @@
 import {memoize} from 'lodash';
-import {StyleSheet} from 'react-native/Libraries/StyleSheet/StyleSheet';
 import {ColorSchemeName} from 'react-native/Libraries/Utilities/Appearance';
-import {ImageStyle, StyleProp, TextStyle, ViewStyle} from 'react-native/types';
+import {
+  ImageStyle,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 export type CssSelector = StyleProp<ViewStyle> &
   StyleProp<ImageStyle> &

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   ActivityIndicator,
   Button,
@@ -24,7 +24,7 @@ export const LoginScreen = () => {
   const [isConnecting, setIsConnecting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const onConnect = async () => {
+  const onConnect = useCallback(async () => {
     try {
       setErrorMsg('');
       setIsConnecting(true);
@@ -37,7 +37,7 @@ export const LoginScreen = () => {
     } finally {
       setIsConnecting(false);
     }
-  };
+  }, [connect, login, password]);
 
   return (
     <View style={s.container}>

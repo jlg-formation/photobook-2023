@@ -1,11 +1,9 @@
-import {memoize} from 'lodash';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   ColorSchemeName,
   Image,
   RefreshControl,
   ScrollView,
-  StyleSheet,
   View,
 } from 'react-native';
 import {PostAdd} from '../../posts/PostAdd';
@@ -21,7 +19,7 @@ export const HomeScreen = () => {
   const {retrieveAll} = useArticleStore();
 
   const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = async () => {
+  const onRefresh = useCallback(async () => {
     try {
       console.log('refresh');
       setRefreshing(true);
@@ -31,7 +29,7 @@ export const HomeScreen = () => {
     } finally {
       setRefreshing(false);
     }
-  };
+  }, [retrieveAll]);
   return (
     <View style={s.container}>
       <ScrollView
