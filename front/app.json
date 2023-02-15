@@ -1,4 +1,5 @@
 {
   "name": "front",
-  "displayName": "PhotoBook"
+  "displayName": "PhotoBook",
+  "domainUrl": "http://localhost:3000"
 }
