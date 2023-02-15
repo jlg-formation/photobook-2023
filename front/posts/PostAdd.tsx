@@ -18,8 +18,10 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {generateId, getExtension} from '../misc';
 import {api} from '../api';
 import {domainUrl} from '../app.json';
+import {useTranslation} from '../store/i18n.store';
 
 export const PostAdd = () => {
+  const {t} = useTranslation();
   const {s} = useComposedStyles(gs, styles);
   const {add, retrieveAll} = useArticleStore();
   const [content, setContent] = useState('');
@@ -88,7 +90,7 @@ export const PostAdd = () => {
     <View style={s.container}>
       <TextInput
         style={s.textarea}
-        placeholder="What is in your mind?"
+        placeholder={t.whatIsOnYourMind}
         multiline={true}
         onChangeText={setContent}
         value={content}

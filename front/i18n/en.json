@@ -1,0 +1,16 @@
+{
+  "home": "Home",
+  "legal": "Legal",
+  "settings": "Settings",
+  "disconnect": "Disconnect",
+  "language": "Language",
+  "user": "User",
+  "legalWarning": "Warning: The legal information are only available in French.",
+  "whatIsOnYourMind": "What is in your mind?",
+  "login": {
+    "signin": "Sign in",
+    "login": "Login",
+    "password": "Password",
+    "connect": "Connect"
+  }
+}

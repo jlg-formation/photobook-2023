@@ -2,6 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useTranslation} from '../store/i18n.store';
 import {HomeScreen} from './menu/HomeScreen';
 import {LegalScreen} from './menu/LegalScreen';
 import {RootStackParamList} from './menu/navigation';
@@ -22,6 +23,7 @@ const getTabBarIcon =
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
 export const MenuScreen = () => {
+  const {t} = useTranslation();
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -35,6 +37,7 @@ export const MenuScreen = () => {
           component={HomeScreen}
           options={{
             tabBarIcon: getTabBarIcon('home'),
+            tabBarLabel: t.home,
           }}
         />
         <Tab.Screen
@@ -42,6 +45,7 @@ export const MenuScreen = () => {
           component={LegalScreen}
           options={{
             tabBarIcon: getTabBarIcon('information-circle'),
+            tabBarLabel: t.legal,
           }}
         />
         <Tab.Screen
@@ -49,6 +53,7 @@ export const MenuScreen = () => {
           component={SettingScreen}
           options={{
             tabBarIcon: getTabBarIcon('settings'),
+            tabBarLabel: t.settings,
           }}
         />
       </Tab.Navigator>

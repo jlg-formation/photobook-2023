@@ -15,6 +15,7 @@ import {useComposedStyles} from '../../styles/hook';
 
 export const HomeScreen = () => {
   const {s} = useComposedStyles(gs, styles);
+
   const {retrieveAll} = useArticleStore();
 
   const [refreshing, setRefreshing] = useState(false);

@@ -12,8 +12,11 @@ import {useAuthenticationStore} from '../store/authentication.store';
 import {gs} from '../styles/global';
 import {useComposedStyles} from '../styles/hook';
 import {defaultLogin} from '../app.json';
+import {useTranslation} from '../store/i18n.store';
 
 export const LoginScreen = () => {
+  const {t: tr} = useTranslation();
+  const t = tr.login;
   const {s} = useComposedStyles(gs, styles);
   const {connect} = useAuthenticationStore();
   const [login, setLogin] = useState(defaultLogin);
@@ -38,10 +41,10 @@ export const LoginScreen = () => {
 
   return (
     <View style={s.container}>
-      <Text style={s.h1}>Se connecter</Text>
+      <Text style={s.h1}>{t.signin}</Text>
       <View style={s.form}>
         <View style={s.label}>
-          <Text style={s.labelText}>Login</Text>
+          <Text style={s.labelText}>{t.login}</Text>
           <TextInput
             style={s.textInput}
             onChangeText={setLogin}
@@ -49,7 +52,7 @@ export const LoginScreen = () => {
           />
         </View>
         <View style={s.label}>
-          <Text style={s.labelText}>Mot de passe</Text>
+          <Text style={s.labelText}>{t.password}</Text>
           <TextInput
             style={s.textInput}
             onChangeText={setPassword}
@@ -63,7 +66,7 @@ export const LoginScreen = () => {
           {isConnecting ? (
             <ActivityIndicator />
           ) : (
-            <Button title="Se connecter" onPress={onConnect} />
+            <Button title={t.connect} onPress={onConnect} />
           )}
         </View>
       </View>

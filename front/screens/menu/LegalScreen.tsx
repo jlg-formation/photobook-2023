@@ -9,6 +9,7 @@ import {
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
 import {displayName} from '../../app.json';
+import {useTranslation} from '../../store/i18n.store';
 
 const cfg = {
   hosting: 'JLG Hosting LLC',
@@ -16,10 +17,13 @@ const cfg = {
 
 export const LegalScreen = () => {
   const {s} = useComposedStyles(gs, styles);
+  const {t} = useTranslation();
   return (
     <ScrollView>
       <View style={s.container}>
-        <Text style={s.h1}>Mentions Légales</Text>
+        <Text style={s.h1}>{t.legal}</Text>
+
+        <Text style={s.h2}>{t.legalWarning}</Text>
 
         <Text style={s.p}>Nom de l'application: {displayName}</Text>
         <Text style={s.p}>Editeur: JLG Consulting</Text>

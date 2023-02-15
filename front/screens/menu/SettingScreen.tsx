@@ -9,21 +9,26 @@ import {
   View,
 } from 'react-native';
 import {useAuthenticationStore} from '../../store/authentication.store';
+import {Locale, useI18nStore, useTranslation} from '../../store/i18n.store';
 import {gs} from '../../styles/global';
 import {useComposedStyles} from '../../styles/hook';
 import {androidRipple} from '../../styles/theme';
 
-const locales = [
+const locales: {locale: Locale; label: string}[] = [
   {locale: 'fr', label: 'Français'},
   {locale: 'en', label: 'English'},
 ];
 
 export const SettingScreen = () => {
   const {s} = useComposedStyles(gs, styles);
+  const {t} = useTranslation();
+  const {setLocale} = useI18nStore();
   const {disconnect} = useAuthenticationStore();
   const [isDisconnecting, setIsDisconnecting] = useState(false);
-  const changeLocale = (locale: string) => () => {
+
+  const changeLocale = (locale: Locale) => () => {
     console.log('update language to', locale);
+    setLocale(locale);
   };
   console.log('s.secondaryButton', s.secondaryButton);
 
@@ -41,9 +46,9 @@ export const SettingScreen = () => {
 
   return (
     <View style={s.container}>
-      <Text style={s.h1}>Paramètres</Text>
+      <Text style={s.h1}>{t.settings}</Text>
       <View>
-        <Text style={s.h2}>Langues</Text>
+        <Text style={s.h2}>{t.language}</Text>
         {locales.map(o => (
           <Pressable
             key={o.locale}
@@ -57,7 +62,7 @@ export const SettingScreen = () => {
         ))}
       </View>
       <View>
-        <Text style={s.h2}>Utilisateur</Text>
+        <Text style={s.h2}>{t.user}</Text>
 
         <TouchableNativeFeedback
           onPress={onDisconnect}
@@ -66,7 +71,7 @@ export const SettingScreen = () => {
             {isDisconnecting ? (
               <ActivityIndicator color="white" />
             ) : (
-              <Text style={s.primaryButtonText}>Disconnect</Text>
+              <Text style={s.primaryButtonText}>{t.disconnect}</Text>
             )}
           </View>
         </TouchableNativeFeedback>

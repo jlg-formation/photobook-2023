@@ -1,0 +1,16 @@
+{
+  "home": "Accueil",
+  "legal": "Mentions Légales",
+  "settings": "Paramètres",
+  "disconnect": "Déconnexion",
+  "language": "Langues",
+  "user": "Utilisateur",
+  "legalWarning": "",
+  "whatIsOnYourMind": "Quoi de neuf ?",
+  "login": {
+    "signin": "Connexion",
+    "login": "Identifiant",
+    "password": "Mot de passe",
+    "connect": "Se connecter"
+  }
+}
